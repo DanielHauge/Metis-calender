@@ -1,6 +1,5 @@
 #!/bin/bash
 export TODOAPI="https://storage.feveile-hauge.dk/todos"
-alias curlauth='curl --cookie /home/daniel/Crendetials/metis-authentication'
 format () {
     while read raw;
     do
@@ -19,4 +18,4 @@ format () {
     done
 }
 
-echo $(curlauth -s -H "Accept: application/json" -H "Content-Type: application/json" $TODOAPI) | jq -j '.[]|.data.body," ", .data.date,"\n"' | format | sed 's/^/ \${color #ddddff}x  \$color /g' 
+echo $(curl --cookie /home/daniel/Crendetials/metis-authentication -s -H "Accept: application/json" -H "Content-Type: application/json" $TODOAPI) | jq -j '.[]|.data.body," ", .data.date,"\n"' | format | sed 's/^/ \${color #ddddff}x  \$color /g' 
